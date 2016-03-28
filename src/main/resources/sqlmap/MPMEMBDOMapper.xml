@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.refmobile.dal.mapper.MPMEMBDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.refmobile.dal.dao.MPMEMBDO" >
+    <id column="MEMBER_ID" property="memberId" jdbcType="CHAR" />
+    <result column="MEMBER_STAT" property="memberStat" jdbcType="CHAR" />
+    <result column="MEMBER_TYPE" property="memberType" jdbcType="CHAR" />
+    <result column="IS_SELF" property="isSelf" jdbcType="CHAR" />
+    <result column="IS_VIRTUAL" property="isVirtual" jdbcType="CHAR" />
+    <result column="IS_ACTIVE" property="isActive" jdbcType="CHAR" />
+    <result column="ORG_ID" property="orgId" jdbcType="CHAR" />
+    <result column="OPDATE" property="opdate" jdbcType="CHAR" />
+    <result column="CLSDATE" property="clsdate" jdbcType="CHAR" />
+    <result column="ACCT_NO" property="acctNo" jdbcType="VARCHAR" />
+    <result column="ACCT_TYPE" property="acctType" jdbcType="VARCHAR" />
+    <result column="NEXT_BANK_SEQ" property="nextBankSeq" jdbcType="DECIMAL" />
+    <result column="NEXT_APPLY_SEQ" property="nextApplySeq" jdbcType="DECIMAL" />
+    <result column="NEXT_TERM_SEQ" property="nextTermSeq" jdbcType="DECIMAL" />
+    <result column="REC_CRET_DTTM" property="recCretDttm" jdbcType="CHAR" />
+    <result column="LST_UPD_DTTM" property="lstUpdDttm" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MEMBER_ID, MEMBER_STAT, MEMBER_TYPE, IS_SELF, IS_VIRTUAL, IS_ACTIVE, ORG_ID, OPDATE, 
+    CLSDATE, ACCT_NO, ACCT_TYPE, NEXT_BANK_SEQ, NEXT_APPLY_SEQ, NEXT_TERM_SEQ, REC_CRET_DTTM, 
+    LST_UPD_DTTM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.refmobile.dal.dao.MPMEMBDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MPMEMB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from MPMEMB
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MPMEMB
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.refmobile.dal.dao.MPMEMBDOExample" >
+    delete from MPMEMB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.refmobile.dal.dao.MPMEMBDO" >
+    insert into MPMEMB (MEMBER_ID, MEMBER_STAT, MEMBER_TYPE, 
+      IS_SELF, IS_VIRTUAL, IS_ACTIVE, 
+      ORG_ID, OPDATE, CLSDATE, ACCT_NO, 
+      ACCT_TYPE, NEXT_BANK_SEQ, NEXT_APPLY_SEQ, 
+      NEXT_TERM_SEQ, REC_CRET_DTTM, LST_UPD_DTTM
+      )
+    values (#{memberId,jdbcType=CHAR}, #{memberStat,jdbcType=CHAR}, #{memberType,jdbcType=CHAR}, 
+      #{isSelf,jdbcType=CHAR}, #{isVirtual,jdbcType=CHAR}, #{isActive,jdbcType=CHAR}, 
+      #{orgId,jdbcType=CHAR}, #{opdate,jdbcType=CHAR}, #{clsdate,jdbcType=CHAR}, #{acctNo,jdbcType=VARCHAR}, 
+      #{acctType,jdbcType=VARCHAR}, #{nextBankSeq,jdbcType=DECIMAL}, #{nextApplySeq,jdbcType=DECIMAL}, 
+      #{nextTermSeq,jdbcType=DECIMAL}, #{recCretDttm,jdbcType=CHAR}, #{lstUpdDttm,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.refmobile.dal.dao.MPMEMBDO" >
+    insert into MPMEMB
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="memberStat != null" >
+        MEMBER_STAT,
+      </if>
+      <if test="memberType != null" >
+        MEMBER_TYPE,
+      </if>
+      <if test="isSelf != null" >
+        IS_SELF,
+      </if>
+      <if test="isVirtual != null" >
+        IS_VIRTUAL,
+      </if>
+      <if test="isActive != null" >
+        IS_ACTIVE,
+      </if>
+      <if test="orgId != null" >
+        ORG_ID,
+      </if>
+      <if test="opdate != null" >
+        OPDATE,
+      </if>
+      <if test="clsdate != null" >
+        CLSDATE,
+      </if>
+      <if test="acctNo != null" >
+        ACCT_NO,
+      </if>
+      <if test="acctType != null" >
+        ACCT_TYPE,
+      </if>
+      <if test="nextBankSeq != null" >
+        NEXT_BANK_SEQ,
+      </if>
+      <if test="nextApplySeq != null" >
+        NEXT_APPLY_SEQ,
+      </if>
+      <if test="nextTermSeq != null" >
+        NEXT_TERM_SEQ,
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM,
+      </if>
+      <if test="lstUpdDttm != null" >
+        LST_UPD_DTTM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=CHAR},
+      </if>
+      <if test="memberStat != null" >
+        #{memberStat,jdbcType=CHAR},
+      </if>
+      <if test="memberType != null" >
+        #{memberType,jdbcType=CHAR},
+      </if>
+      <if test="isSelf != null" >
+        #{isSelf,jdbcType=CHAR},
+      </if>
+      <if test="isVirtual != null" >
+        #{isVirtual,jdbcType=CHAR},
+      </if>
+      <if test="isActive != null" >
+        #{isActive,jdbcType=CHAR},
+      </if>
+      <if test="orgId != null" >
+        #{orgId,jdbcType=CHAR},
+      </if>
+      <if test="opdate != null" >
+        #{opdate,jdbcType=CHAR},
+      </if>
+      <if test="clsdate != null" >
+        #{clsdate,jdbcType=CHAR},
+      </if>
+      <if test="acctNo != null" >
+        #{acctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="acctType != null" >
+        #{acctType,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBankSeq != null" >
+        #{nextBankSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="nextApplySeq != null" >
+        #{nextApplySeq,jdbcType=DECIMAL},
+      </if>
+      <if test="nextTermSeq != null" >
+        #{nextTermSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="recCretDttm != null" >
+        #{recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstUpdDttm != null" >
+        #{lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.refmobile.dal.dao.MPMEMBDOExample" resultType="java.lang.Integer" >
+    select count(*) from MPMEMB
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update MPMEMB
+    <set >
+      <if test="record.memberId != null" >
+        MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      </if>
+      <if test="record.memberStat != null" >
+        MEMBER_STAT = #{record.memberStat,jdbcType=CHAR},
+      </if>
+      <if test="record.memberType != null" >
+        MEMBER_TYPE = #{record.memberType,jdbcType=CHAR},
+      </if>
+      <if test="record.isSelf != null" >
+        IS_SELF = #{record.isSelf,jdbcType=CHAR},
+      </if>
+      <if test="record.isVirtual != null" >
+        IS_VIRTUAL = #{record.isVirtual,jdbcType=CHAR},
+      </if>
+      <if test="record.isActive != null" >
+        IS_ACTIVE = #{record.isActive,jdbcType=CHAR},
+      </if>
+      <if test="record.orgId != null" >
+        ORG_ID = #{record.orgId,jdbcType=CHAR},
+      </if>
+      <if test="record.opdate != null" >
+        OPDATE = #{record.opdate,jdbcType=CHAR},
+      </if>
+      <if test="record.clsdate != null" >
+        CLSDATE = #{record.clsdate,jdbcType=CHAR},
+      </if>
+      <if test="record.acctNo != null" >
+        ACCT_NO = #{record.acctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctType != null" >
+        ACCT_TYPE = #{record.acctType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextBankSeq != null" >
+        NEXT_BANK_SEQ = #{record.nextBankSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nextApplySeq != null" >
+        NEXT_APPLY_SEQ = #{record.nextApplySeq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nextTermSeq != null" >
+        NEXT_TERM_SEQ = #{record.nextTermSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.recCretDttm != null" >
+        REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="record.lstUpdDttm != null" >
+        LST_UPD_DTTM = #{record.lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update MPMEMB
+    set MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      MEMBER_STAT = #{record.memberStat,jdbcType=CHAR},
+      MEMBER_TYPE = #{record.memberType,jdbcType=CHAR},
+      IS_SELF = #{record.isSelf,jdbcType=CHAR},
+      IS_VIRTUAL = #{record.isVirtual,jdbcType=CHAR},
+      IS_ACTIVE = #{record.isActive,jdbcType=CHAR},
+      ORG_ID = #{record.orgId,jdbcType=CHAR},
+      OPDATE = #{record.opdate,jdbcType=CHAR},
+      CLSDATE = #{record.clsdate,jdbcType=CHAR},
+      ACCT_NO = #{record.acctNo,jdbcType=VARCHAR},
+      ACCT_TYPE = #{record.acctType,jdbcType=VARCHAR},
+      NEXT_BANK_SEQ = #{record.nextBankSeq,jdbcType=DECIMAL},
+      NEXT_APPLY_SEQ = #{record.nextApplySeq,jdbcType=DECIMAL},
+      NEXT_TERM_SEQ = #{record.nextTermSeq,jdbcType=DECIMAL},
+      REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR},
+      LST_UPD_DTTM = #{record.lstUpdDttm,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.refmobile.dal.dao.MPMEMBDO" >
+    update MPMEMB
+    <set >
+      <if test="memberStat != null" >
+        MEMBER_STAT = #{memberStat,jdbcType=CHAR},
+      </if>
+      <if test="memberType != null" >
+        MEMBER_TYPE = #{memberType,jdbcType=CHAR},
+      </if>
+      <if test="isSelf != null" >
+        IS_SELF = #{isSelf,jdbcType=CHAR},
+      </if>
+      <if test="isVirtual != null" >
+        IS_VIRTUAL = #{isVirtual,jdbcType=CHAR},
+      </if>
+      <if test="isActive != null" >
+        IS_ACTIVE = #{isActive,jdbcType=CHAR},
+      </if>
+      <if test="orgId != null" >
+        ORG_ID = #{orgId,jdbcType=CHAR},
+      </if>
+      <if test="opdate != null" >
+        OPDATE = #{opdate,jdbcType=CHAR},
+      </if>
+      <if test="clsdate != null" >
+        CLSDATE = #{clsdate,jdbcType=CHAR},
+      </if>
+      <if test="acctNo != null" >
+        ACCT_NO = #{acctNo,jdbcType=VARCHAR},
+      </if>
+      <if test="acctType != null" >
+        ACCT_TYPE = #{acctType,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBankSeq != null" >
+        NEXT_BANK_SEQ = #{nextBankSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="nextApplySeq != null" >
+        NEXT_APPLY_SEQ = #{nextApplySeq,jdbcType=DECIMAL},
+      </if>
+      <if test="nextTermSeq != null" >
+        NEXT_TERM_SEQ = #{nextTermSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstUpdDttm != null" >
+        LST_UPD_DTTM = #{lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.refmobile.dal.dao.MPMEMBDO" >
+    update MPMEMB
+    set MEMBER_STAT = #{memberStat,jdbcType=CHAR},
+      MEMBER_TYPE = #{memberType,jdbcType=CHAR},
+      IS_SELF = #{isSelf,jdbcType=CHAR},
+      IS_VIRTUAL = #{isVirtual,jdbcType=CHAR},
+      IS_ACTIVE = #{isActive,jdbcType=CHAR},
+      ORG_ID = #{orgId,jdbcType=CHAR},
+      OPDATE = #{opdate,jdbcType=CHAR},
+      CLSDATE = #{clsdate,jdbcType=CHAR},
+      ACCT_NO = #{acctNo,jdbcType=VARCHAR},
+      ACCT_TYPE = #{acctType,jdbcType=VARCHAR},
+      NEXT_BANK_SEQ = #{nextBankSeq,jdbcType=DECIMAL},
+      NEXT_APPLY_SEQ = #{nextApplySeq,jdbcType=DECIMAL},
+      NEXT_TERM_SEQ = #{nextTermSeq,jdbcType=DECIMAL},
+      REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR},
+      LST_UPD_DTTM = #{lstUpdDttm,jdbcType=CHAR}
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </update>
+</mapper>

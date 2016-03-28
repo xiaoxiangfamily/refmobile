@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.refmobile.dal.mapper.MPMERDTLDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.refmobile.dal.dao.MPMERDTLDO" >
+    <id column="MEMBER_ID" property="memberId" jdbcType="CHAR" />
+    <result column="MERCH_NAME" property="merchName" jdbcType="VARCHAR" />
+    <result column="MERCH_SHORT_NAME" property="merchShortName" jdbcType="VARCHAR" />
+    <result column="OEM_ID" property="oemId" jdbcType="CHAR" />
+    <result column="AGENT_ID" property="agentId" jdbcType="CHAR" />
+    <result column="LEGAL_NAME" property="legalName" jdbcType="VARCHAR" />
+    <result column="ID_TYPE" property="idType" jdbcType="CHAR" />
+    <result column="ID_NO" property="idNo" jdbcType="VARCHAR" />
+    <result column="SIGN_DATE" property="signDate" jdbcType="CHAR" />
+    <result column="APPROVE_FLAG" property="approveFlag" jdbcType="CHAR" />
+    <result column="ARCH_FLPH_01" property="archFlph01" jdbcType="VARCHAR" />
+    <result column="ARCH_FLPH_02" property="archFlph02" jdbcType="VARCHAR" />
+    <result column="ARCH_FLPH_03" property="archFlph03" jdbcType="VARCHAR" />
+    <result column="ARCH_FLPH_04" property="archFlph04" jdbcType="VARCHAR" />
+    <result column="NEXT_BANK_SEQ" property="nextBankSeq" jdbcType="DECIMAL" />
+    <result column="NEXT_APPLY_SEQ" property="nextApplySeq" jdbcType="DECIMAL" />
+    <result column="NEXT_TERM_SEQ" property="nextTermSeq" jdbcType="DECIMAL" />
+    <result column="TELLER_ID" property="tellerId" jdbcType="VARCHAR" />
+    <result column="REC_CRET_DTTM" property="recCretDttm" jdbcType="CHAR" />
+    <result column="LST_UPD_DTTM" property="lstUpdDttm" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MEMBER_ID, MERCH_NAME, MERCH_SHORT_NAME, OEM_ID, AGENT_ID, LEGAL_NAME, ID_TYPE, ID_NO, 
+    SIGN_DATE, APPROVE_FLAG, ARCH_FLPH_01, ARCH_FLPH_02, ARCH_FLPH_03, ARCH_FLPH_04, 
+    NEXT_BANK_SEQ, NEXT_APPLY_SEQ, NEXT_TERM_SEQ, TELLER_ID, REC_CRET_DTTM, LST_UPD_DTTM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.refmobile.dal.dao.MPMERDTLDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MPMERDTL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from MPMERDTL
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MPMERDTL
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.refmobile.dal.dao.MPMERDTLDOExample" >
+    delete from MPMERDTL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.refmobile.dal.dao.MPMERDTLDO" >
+    insert into MPMERDTL (MEMBER_ID, MERCH_NAME, MERCH_SHORT_NAME, 
+      OEM_ID, AGENT_ID, LEGAL_NAME, 
+      ID_TYPE, ID_NO, SIGN_DATE, APPROVE_FLAG, 
+      ARCH_FLPH_01, ARCH_FLPH_02, ARCH_FLPH_03, 
+      ARCH_FLPH_04, NEXT_BANK_SEQ, NEXT_APPLY_SEQ, 
+      NEXT_TERM_SEQ, TELLER_ID, REC_CRET_DTTM, 
+      LST_UPD_DTTM)
+    values (#{memberId,jdbcType=CHAR}, #{merchName,jdbcType=VARCHAR}, #{merchShortName,jdbcType=VARCHAR}, 
+      #{oemId,jdbcType=CHAR}, #{agentId,jdbcType=CHAR}, #{legalName,jdbcType=VARCHAR}, 
+      #{idType,jdbcType=CHAR}, #{idNo,jdbcType=VARCHAR}, #{signDate,jdbcType=CHAR}, #{approveFlag,jdbcType=CHAR}, 
+      #{archFlph01,jdbcType=VARCHAR}, #{archFlph02,jdbcType=VARCHAR}, #{archFlph03,jdbcType=VARCHAR}, 
+      #{archFlph04,jdbcType=VARCHAR}, #{nextBankSeq,jdbcType=DECIMAL}, #{nextApplySeq,jdbcType=DECIMAL}, 
+      #{nextTermSeq,jdbcType=DECIMAL}, #{tellerId,jdbcType=VARCHAR}, #{recCretDttm,jdbcType=CHAR}, 
+      #{lstUpdDttm,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.refmobile.dal.dao.MPMERDTLDO" >
+    insert into MPMERDTL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="merchName != null" >
+        MERCH_NAME,
+      </if>
+      <if test="merchShortName != null" >
+        MERCH_SHORT_NAME,
+      </if>
+      <if test="oemId != null" >
+        OEM_ID,
+      </if>
+      <if test="agentId != null" >
+        AGENT_ID,
+      </if>
+      <if test="legalName != null" >
+        LEGAL_NAME,
+      </if>
+      <if test="idType != null" >
+        ID_TYPE,
+      </if>
+      <if test="idNo != null" >
+        ID_NO,
+      </if>
+      <if test="signDate != null" >
+        SIGN_DATE,
+      </if>
+      <if test="approveFlag != null" >
+        APPROVE_FLAG,
+      </if>
+      <if test="archFlph01 != null" >
+        ARCH_FLPH_01,
+      </if>
+      <if test="archFlph02 != null" >
+        ARCH_FLPH_02,
+      </if>
+      <if test="archFlph03 != null" >
+        ARCH_FLPH_03,
+      </if>
+      <if test="archFlph04 != null" >
+        ARCH_FLPH_04,
+      </if>
+      <if test="nextBankSeq != null" >
+        NEXT_BANK_SEQ,
+      </if>
+      <if test="nextApplySeq != null" >
+        NEXT_APPLY_SEQ,
+      </if>
+      <if test="nextTermSeq != null" >
+        NEXT_TERM_SEQ,
+      </if>
+      <if test="tellerId != null" >
+        TELLER_ID,
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM,
+      </if>
+      <if test="lstUpdDttm != null" >
+        LST_UPD_DTTM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=CHAR},
+      </if>
+      <if test="merchName != null" >
+        #{merchName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchShortName != null" >
+        #{merchShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="oemId != null" >
+        #{oemId,jdbcType=CHAR},
+      </if>
+      <if test="agentId != null" >
+        #{agentId,jdbcType=CHAR},
+      </if>
+      <if test="legalName != null" >
+        #{legalName,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null" >
+        #{idType,jdbcType=CHAR},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="signDate != null" >
+        #{signDate,jdbcType=CHAR},
+      </if>
+      <if test="approveFlag != null" >
+        #{approveFlag,jdbcType=CHAR},
+      </if>
+      <if test="archFlph01 != null" >
+        #{archFlph01,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph02 != null" >
+        #{archFlph02,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph03 != null" >
+        #{archFlph03,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph04 != null" >
+        #{archFlph04,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBankSeq != null" >
+        #{nextBankSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="nextApplySeq != null" >
+        #{nextApplySeq,jdbcType=DECIMAL},
+      </if>
+      <if test="nextTermSeq != null" >
+        #{nextTermSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="tellerId != null" >
+        #{tellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="recCretDttm != null" >
+        #{recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstUpdDttm != null" >
+        #{lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.refmobile.dal.dao.MPMERDTLDOExample" resultType="java.lang.Integer" >
+    select count(*) from MPMERDTL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update MPMERDTL
+    <set >
+      <if test="record.memberId != null" >
+        MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      </if>
+      <if test="record.merchName != null" >
+        MERCH_NAME = #{record.merchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merchShortName != null" >
+        MERCH_SHORT_NAME = #{record.merchShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.oemId != null" >
+        OEM_ID = #{record.oemId,jdbcType=CHAR},
+      </if>
+      <if test="record.agentId != null" >
+        AGENT_ID = #{record.agentId,jdbcType=CHAR},
+      </if>
+      <if test="record.legalName != null" >
+        LEGAL_NAME = #{record.legalName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idType != null" >
+        ID_TYPE = #{record.idType,jdbcType=CHAR},
+      </if>
+      <if test="record.idNo != null" >
+        ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signDate != null" >
+        SIGN_DATE = #{record.signDate,jdbcType=CHAR},
+      </if>
+      <if test="record.approveFlag != null" >
+        APPROVE_FLAG = #{record.approveFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.archFlph01 != null" >
+        ARCH_FLPH_01 = #{record.archFlph01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.archFlph02 != null" >
+        ARCH_FLPH_02 = #{record.archFlph02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.archFlph03 != null" >
+        ARCH_FLPH_03 = #{record.archFlph03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.archFlph04 != null" >
+        ARCH_FLPH_04 = #{record.archFlph04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextBankSeq != null" >
+        NEXT_BANK_SEQ = #{record.nextBankSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nextApplySeq != null" >
+        NEXT_APPLY_SEQ = #{record.nextApplySeq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.nextTermSeq != null" >
+        NEXT_TERM_SEQ = #{record.nextTermSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tellerId != null" >
+        TELLER_ID = #{record.tellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recCretDttm != null" >
+        REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="record.lstUpdDttm != null" >
+        LST_UPD_DTTM = #{record.lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update MPMERDTL
+    set MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      MERCH_NAME = #{record.merchName,jdbcType=VARCHAR},
+      MERCH_SHORT_NAME = #{record.merchShortName,jdbcType=VARCHAR},
+      OEM_ID = #{record.oemId,jdbcType=CHAR},
+      AGENT_ID = #{record.agentId,jdbcType=CHAR},
+      LEGAL_NAME = #{record.legalName,jdbcType=VARCHAR},
+      ID_TYPE = #{record.idType,jdbcType=CHAR},
+      ID_NO = #{record.idNo,jdbcType=VARCHAR},
+      SIGN_DATE = #{record.signDate,jdbcType=CHAR},
+      APPROVE_FLAG = #{record.approveFlag,jdbcType=CHAR},
+      ARCH_FLPH_01 = #{record.archFlph01,jdbcType=VARCHAR},
+      ARCH_FLPH_02 = #{record.archFlph02,jdbcType=VARCHAR},
+      ARCH_FLPH_03 = #{record.archFlph03,jdbcType=VARCHAR},
+      ARCH_FLPH_04 = #{record.archFlph04,jdbcType=VARCHAR},
+      NEXT_BANK_SEQ = #{record.nextBankSeq,jdbcType=DECIMAL},
+      NEXT_APPLY_SEQ = #{record.nextApplySeq,jdbcType=DECIMAL},
+      NEXT_TERM_SEQ = #{record.nextTermSeq,jdbcType=DECIMAL},
+      TELLER_ID = #{record.tellerId,jdbcType=VARCHAR},
+      REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR},
+      LST_UPD_DTTM = #{record.lstUpdDttm,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.refmobile.dal.dao.MPMERDTLDO" >
+    update MPMERDTL
+    <set >
+      <if test="merchName != null" >
+        MERCH_NAME = #{merchName,jdbcType=VARCHAR},
+      </if>
+      <if test="merchShortName != null" >
+        MERCH_SHORT_NAME = #{merchShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="oemId != null" >
+        OEM_ID = #{oemId,jdbcType=CHAR},
+      </if>
+      <if test="agentId != null" >
+        AGENT_ID = #{agentId,jdbcType=CHAR},
+      </if>
+      <if test="legalName != null" >
+        LEGAL_NAME = #{legalName,jdbcType=VARCHAR},
+      </if>
+      <if test="idType != null" >
+        ID_TYPE = #{idType,jdbcType=CHAR},
+      </if>
+      <if test="idNo != null" >
+        ID_NO = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="signDate != null" >
+        SIGN_DATE = #{signDate,jdbcType=CHAR},
+      </if>
+      <if test="approveFlag != null" >
+        APPROVE_FLAG = #{approveFlag,jdbcType=CHAR},
+      </if>
+      <if test="archFlph01 != null" >
+        ARCH_FLPH_01 = #{archFlph01,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph02 != null" >
+        ARCH_FLPH_02 = #{archFlph02,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph03 != null" >
+        ARCH_FLPH_03 = #{archFlph03,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph04 != null" >
+        ARCH_FLPH_04 = #{archFlph04,jdbcType=VARCHAR},
+      </if>
+      <if test="nextBankSeq != null" >
+        NEXT_BANK_SEQ = #{nextBankSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="nextApplySeq != null" >
+        NEXT_APPLY_SEQ = #{nextApplySeq,jdbcType=DECIMAL},
+      </if>
+      <if test="nextTermSeq != null" >
+        NEXT_TERM_SEQ = #{nextTermSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="tellerId != null" >
+        TELLER_ID = #{tellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstUpdDttm != null" >
+        LST_UPD_DTTM = #{lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.refmobile.dal.dao.MPMERDTLDO" >
+    update MPMERDTL
+    set MERCH_NAME = #{merchName,jdbcType=VARCHAR},
+      MERCH_SHORT_NAME = #{merchShortName,jdbcType=VARCHAR},
+      OEM_ID = #{oemId,jdbcType=CHAR},
+      AGENT_ID = #{agentId,jdbcType=CHAR},
+      LEGAL_NAME = #{legalName,jdbcType=VARCHAR},
+      ID_TYPE = #{idType,jdbcType=CHAR},
+      ID_NO = #{idNo,jdbcType=VARCHAR},
+      SIGN_DATE = #{signDate,jdbcType=CHAR},
+      APPROVE_FLAG = #{approveFlag,jdbcType=CHAR},
+      ARCH_FLPH_01 = #{archFlph01,jdbcType=VARCHAR},
+      ARCH_FLPH_02 = #{archFlph02,jdbcType=VARCHAR},
+      ARCH_FLPH_03 = #{archFlph03,jdbcType=VARCHAR},
+      ARCH_FLPH_04 = #{archFlph04,jdbcType=VARCHAR},
+      NEXT_BANK_SEQ = #{nextBankSeq,jdbcType=DECIMAL},
+      NEXT_APPLY_SEQ = #{nextApplySeq,jdbcType=DECIMAL},
+      NEXT_TERM_SEQ = #{nextTermSeq,jdbcType=DECIMAL},
+      TELLER_ID = #{tellerId,jdbcType=VARCHAR},
+      REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR},
+      LST_UPD_DTTM = #{lstUpdDttm,jdbcType=CHAR}
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </update>
+</mapper>

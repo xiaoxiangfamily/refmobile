@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.refmobile.dal.mapper.MPBANKDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.refmobile.dal.dao.MPBANKDO" >
+    <id column="MEMBER_ID" property="memberId" jdbcType="CHAR" />
+    <id column="SEQ_NO" property="seqNo" jdbcType="DECIMAL" />
+    <result column="SIGN_TYPE" property="signType" jdbcType="DECIMAL" />
+    <result column="SIGN_STAT" property="signStat" jdbcType="CHAR" />
+    <result column="IS_DEFAULT" property="isDefault" jdbcType="CHAR" />
+    <result column="BANK_ID" property="bankId" jdbcType="CHAR" />
+    <result column="PBANK_ID" property="pbankId" jdbcType="CHAR" />
+    <result column="BANK_BRANCH_NAME" property="bankBranchName" jdbcType="VARCHAR" />
+    <result column="BANK_PROV_NAME" property="bankProvName" jdbcType="VARCHAR" />
+    <result column="BANK_CITY_NAME" property="bankCityName" jdbcType="VARCHAR" />
+    <result column="BANK_ACCT_ID" property="bankAcctId" jdbcType="VARCHAR" />
+    <result column="BANK_ACCT_NAME" property="bankAcctName" jdbcType="VARCHAR" />
+    <result column="BANK_MOBILE" property="bankMobile" jdbcType="CHAR" />
+    <result column="IS_PRIVATE" property="isPrivate" jdbcType="CHAR" />
+    <result column="REC_CRET_DTTM" property="recCretDttm" jdbcType="CHAR" />
+    <result column="LST_UPD_DTTM" property="lstUpdDttm" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MEMBER_ID, SEQ_NO, SIGN_TYPE, SIGN_STAT, IS_DEFAULT, BANK_ID, PBANK_ID, BANK_BRANCH_NAME, 
+    BANK_PROV_NAME, BANK_CITY_NAME, BANK_ACCT_ID, BANK_ACCT_NAME, BANK_MOBILE, IS_PRIVATE, 
+    REC_CRET_DTTM, LST_UPD_DTTM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.refmobile.dal.dao.MPBANKDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MPBANK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.allcheer.refmobile.dal.dao.MPBANKDOKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from MPBANK
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+      and SEQ_NO = #{seqNo,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.allcheer.refmobile.dal.dao.MPBANKDOKey" >
+    delete from MPBANK
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+      and SEQ_NO = #{seqNo,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.refmobile.dal.dao.MPBANKDOExample" >
+    delete from MPBANK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.refmobile.dal.dao.MPBANKDO" >
+    insert into MPBANK (MEMBER_ID, SEQ_NO, SIGN_TYPE, 
+      SIGN_STAT, IS_DEFAULT, BANK_ID, 
+      PBANK_ID, BANK_BRANCH_NAME, BANK_PROV_NAME, 
+      BANK_CITY_NAME, BANK_ACCT_ID, BANK_ACCT_NAME, 
+      BANK_MOBILE, IS_PRIVATE, REC_CRET_DTTM, 
+      LST_UPD_DTTM)
+    values (#{memberId,jdbcType=CHAR}, #{seqNo,jdbcType=DECIMAL}, #{signType,jdbcType=DECIMAL}, 
+      #{signStat,jdbcType=CHAR}, #{isDefault,jdbcType=CHAR}, #{bankId,jdbcType=CHAR}, 
+      #{pbankId,jdbcType=CHAR}, #{bankBranchName,jdbcType=VARCHAR}, #{bankProvName,jdbcType=VARCHAR}, 
+      #{bankCityName,jdbcType=VARCHAR}, #{bankAcctId,jdbcType=VARCHAR}, #{bankAcctName,jdbcType=VARCHAR}, 
+      #{bankMobile,jdbcType=CHAR}, #{isPrivate,jdbcType=CHAR}, #{recCretDttm,jdbcType=CHAR}, 
+      #{lstUpdDttm,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.refmobile.dal.dao.MPBANKDO" >
+    insert into MPBANK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="seqNo != null" >
+        SEQ_NO,
+      </if>
+      <if test="signType != null" >
+        SIGN_TYPE,
+      </if>
+      <if test="signStat != null" >
+        SIGN_STAT,
+      </if>
+      <if test="isDefault != null" >
+        IS_DEFAULT,
+      </if>
+      <if test="bankId != null" >
+        BANK_ID,
+      </if>
+      <if test="pbankId != null" >
+        PBANK_ID,
+      </if>
+      <if test="bankBranchName != null" >
+        BANK_BRANCH_NAME,
+      </if>
+      <if test="bankProvName != null" >
+        BANK_PROV_NAME,
+      </if>
+      <if test="bankCityName != null" >
+        BANK_CITY_NAME,
+      </if>
+      <if test="bankAcctId != null" >
+        BANK_ACCT_ID,
+      </if>
+      <if test="bankAcctName != null" >
+        BANK_ACCT_NAME,
+      </if>
+      <if test="bankMobile != null" >
+        BANK_MOBILE,
+      </if>
+      <if test="isPrivate != null" >
+        IS_PRIVATE,
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM,
+      </if>
+      <if test="lstUpdDttm != null" >
+        LST_UPD_DTTM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=CHAR},
+      </if>
+      <if test="seqNo != null" >
+        #{seqNo,jdbcType=DECIMAL},
+      </if>
+      <if test="signType != null" >
+        #{signType,jdbcType=DECIMAL},
+      </if>
+      <if test="signStat != null" >
+        #{signStat,jdbcType=CHAR},
+      </if>
+      <if test="isDefault != null" >
+        #{isDefault,jdbcType=CHAR},
+      </if>
+      <if test="bankId != null" >
+        #{bankId,jdbcType=CHAR},
+      </if>
+      <if test="pbankId != null" >
+        #{pbankId,jdbcType=CHAR},
+      </if>
+      <if test="bankBranchName != null" >
+        #{bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankProvName != null" >
+        #{bankProvName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCityName != null" >
+        #{bankCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAcctId != null" >
+        #{bankAcctId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAcctName != null" >
+        #{bankAcctName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankMobile != null" >
+        #{bankMobile,jdbcType=CHAR},
+      </if>
+      <if test="isPrivate != null" >
+        #{isPrivate,jdbcType=CHAR},
+      </if>
+      <if test="recCretDttm != null" >
+        #{recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstUpdDttm != null" >
+        #{lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.refmobile.dal.dao.MPBANKDOExample" resultType="java.lang.Integer" >
+    select count(*) from MPBANK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update MPBANK
+    <set >
+      <if test="record.memberId != null" >
+        MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      </if>
+      <if test="record.seqNo != null" >
+        SEQ_NO = #{record.seqNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.signType != null" >
+        SIGN_TYPE = #{record.signType,jdbcType=DECIMAL},
+      </if>
+      <if test="record.signStat != null" >
+        SIGN_STAT = #{record.signStat,jdbcType=CHAR},
+      </if>
+      <if test="record.isDefault != null" >
+        IS_DEFAULT = #{record.isDefault,jdbcType=CHAR},
+      </if>
+      <if test="record.bankId != null" >
+        BANK_ID = #{record.bankId,jdbcType=CHAR},
+      </if>
+      <if test="record.pbankId != null" >
+        PBANK_ID = #{record.pbankId,jdbcType=CHAR},
+      </if>
+      <if test="record.bankBranchName != null" >
+        BANK_BRANCH_NAME = #{record.bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankProvName != null" >
+        BANK_PROV_NAME = #{record.bankProvName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankCityName != null" >
+        BANK_CITY_NAME = #{record.bankCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAcctId != null" >
+        BANK_ACCT_ID = #{record.bankAcctId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankAcctName != null" >
+        BANK_ACCT_NAME = #{record.bankAcctName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankMobile != null" >
+        BANK_MOBILE = #{record.bankMobile,jdbcType=CHAR},
+      </if>
+      <if test="record.isPrivate != null" >
+        IS_PRIVATE = #{record.isPrivate,jdbcType=CHAR},
+      </if>
+      <if test="record.recCretDttm != null" >
+        REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="record.lstUpdDttm != null" >
+        LST_UPD_DTTM = #{record.lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update MPBANK
+    set MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      SEQ_NO = #{record.seqNo,jdbcType=DECIMAL},
+      SIGN_TYPE = #{record.signType,jdbcType=DECIMAL},
+      SIGN_STAT = #{record.signStat,jdbcType=CHAR},
+      IS_DEFAULT = #{record.isDefault,jdbcType=CHAR},
+      BANK_ID = #{record.bankId,jdbcType=CHAR},
+      PBANK_ID = #{record.pbankId,jdbcType=CHAR},
+      BANK_BRANCH_NAME = #{record.bankBranchName,jdbcType=VARCHAR},
+      BANK_PROV_NAME = #{record.bankProvName,jdbcType=VARCHAR},
+      BANK_CITY_NAME = #{record.bankCityName,jdbcType=VARCHAR},
+      BANK_ACCT_ID = #{record.bankAcctId,jdbcType=VARCHAR},
+      BANK_ACCT_NAME = #{record.bankAcctName,jdbcType=VARCHAR},
+      BANK_MOBILE = #{record.bankMobile,jdbcType=CHAR},
+      IS_PRIVATE = #{record.isPrivate,jdbcType=CHAR},
+      REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR},
+      LST_UPD_DTTM = #{record.lstUpdDttm,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.refmobile.dal.dao.MPBANKDO" >
+    update MPBANK
+    <set >
+      <if test="signType != null" >
+        SIGN_TYPE = #{signType,jdbcType=DECIMAL},
+      </if>
+      <if test="signStat != null" >
+        SIGN_STAT = #{signStat,jdbcType=CHAR},
+      </if>
+      <if test="isDefault != null" >
+        IS_DEFAULT = #{isDefault,jdbcType=CHAR},
+      </if>
+      <if test="bankId != null" >
+        BANK_ID = #{bankId,jdbcType=CHAR},
+      </if>
+      <if test="pbankId != null" >
+        PBANK_ID = #{pbankId,jdbcType=CHAR},
+      </if>
+      <if test="bankBranchName != null" >
+        BANK_BRANCH_NAME = #{bankBranchName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankProvName != null" >
+        BANK_PROV_NAME = #{bankProvName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankCityName != null" >
+        BANK_CITY_NAME = #{bankCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAcctId != null" >
+        BANK_ACCT_ID = #{bankAcctId,jdbcType=VARCHAR},
+      </if>
+      <if test="bankAcctName != null" >
+        BANK_ACCT_NAME = #{bankAcctName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankMobile != null" >
+        BANK_MOBILE = #{bankMobile,jdbcType=CHAR},
+      </if>
+      <if test="isPrivate != null" >
+        IS_PRIVATE = #{isPrivate,jdbcType=CHAR},
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstUpdDttm != null" >
+        LST_UPD_DTTM = #{lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+      and SEQ_NO = #{seqNo,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.refmobile.dal.dao.MPBANKDO" >
+    update MPBANK
+    set SIGN_TYPE = #{signType,jdbcType=DECIMAL},
+      SIGN_STAT = #{signStat,jdbcType=CHAR},
+      IS_DEFAULT = #{isDefault,jdbcType=CHAR},
+      BANK_ID = #{bankId,jdbcType=CHAR},
+      PBANK_ID = #{pbankId,jdbcType=CHAR},
+      BANK_BRANCH_NAME = #{bankBranchName,jdbcType=VARCHAR},
+      BANK_PROV_NAME = #{bankProvName,jdbcType=VARCHAR},
+      BANK_CITY_NAME = #{bankCityName,jdbcType=VARCHAR},
+      BANK_ACCT_ID = #{bankAcctId,jdbcType=VARCHAR},
+      BANK_ACCT_NAME = #{bankAcctName,jdbcType=VARCHAR},
+      BANK_MOBILE = #{bankMobile,jdbcType=CHAR},
+      IS_PRIVATE = #{isPrivate,jdbcType=CHAR},
+      REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR},
+      LST_UPD_DTTM = #{lstUpdDttm,jdbcType=CHAR}
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+      and SEQ_NO = #{seqNo,jdbcType=DECIMAL}
+  </update>
+</mapper>

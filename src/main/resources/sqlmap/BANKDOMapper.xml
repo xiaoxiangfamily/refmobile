@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.refmobile.dal.mapper.BANKDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.refmobile.dal.dao.BANKDO" >
+    <id column="BANK_ID" property="bankId" jdbcType="CHAR" />
+    <result column="BANK_STAT" property="bankStat" jdbcType="CHAR" />
+    <result column="BANK_NAME" property="bankName" jdbcType="VARCHAR" />
+    <result column="BANK_SHORT_NAME" property="bankShortName" jdbcType="VARCHAR" />
+    <result column="IS_VERIFY_ID" property="isVerifyId" jdbcType="CHAR" />
+    <result column="IS_WITHHOLD" property="isWithhold" jdbcType="CHAR" />
+    <result column="IS_CASH" property="isCash" jdbcType="CHAR" />
+    <result column="IS_CREDIT" property="isCredit" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    BANK_ID, BANK_STAT, BANK_NAME, BANK_SHORT_NAME, IS_VERIFY_ID, IS_WITHHOLD, IS_CASH, 
+    IS_CREDIT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.refmobile.dal.dao.BANKDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from BANK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from BANK
+    where BANK_ID = #{bankId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from BANK
+    where BANK_ID = #{bankId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.refmobile.dal.dao.BANKDOExample" >
+    delete from BANK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.refmobile.dal.dao.BANKDO" >
+    insert into BANK (BANK_ID, BANK_STAT, BANK_NAME, 
+      BANK_SHORT_NAME, IS_VERIFY_ID, IS_WITHHOLD, 
+      IS_CASH, IS_CREDIT)
+    values (#{bankId,jdbcType=CHAR}, #{bankStat,jdbcType=CHAR}, #{bankName,jdbcType=VARCHAR}, 
+      #{bankShortName,jdbcType=VARCHAR}, #{isVerifyId,jdbcType=CHAR}, #{isWithhold,jdbcType=CHAR}, 
+      #{isCash,jdbcType=CHAR}, #{isCredit,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.refmobile.dal.dao.BANKDO" >
+    insert into BANK
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="bankId != null" >
+        BANK_ID,
+      </if>
+      <if test="bankStat != null" >
+        BANK_STAT,
+      </if>
+      <if test="bankName != null" >
+        BANK_NAME,
+      </if>
+      <if test="bankShortName != null" >
+        BANK_SHORT_NAME,
+      </if>
+      <if test="isVerifyId != null" >
+        IS_VERIFY_ID,
+      </if>
+      <if test="isWithhold != null" >
+        IS_WITHHOLD,
+      </if>
+      <if test="isCash != null" >
+        IS_CASH,
+      </if>
+      <if test="isCredit != null" >
+        IS_CREDIT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="bankId != null" >
+        #{bankId,jdbcType=CHAR},
+      </if>
+      <if test="bankStat != null" >
+        #{bankStat,jdbcType=CHAR},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankShortName != null" >
+        #{bankShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="isVerifyId != null" >
+        #{isVerifyId,jdbcType=CHAR},
+      </if>
+      <if test="isWithhold != null" >
+        #{isWithhold,jdbcType=CHAR},
+      </if>
+      <if test="isCash != null" >
+        #{isCash,jdbcType=CHAR},
+      </if>
+      <if test="isCredit != null" >
+        #{isCredit,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.refmobile.dal.dao.BANKDOExample" resultType="java.lang.Integer" >
+    select count(*) from BANK
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update BANK
+    <set >
+      <if test="record.bankId != null" >
+        BANK_ID = #{record.bankId,jdbcType=CHAR},
+      </if>
+      <if test="record.bankStat != null" >
+        BANK_STAT = #{record.bankStat,jdbcType=CHAR},
+      </if>
+      <if test="record.bankName != null" >
+        BANK_NAME = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankShortName != null" >
+        BANK_SHORT_NAME = #{record.bankShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isVerifyId != null" >
+        IS_VERIFY_ID = #{record.isVerifyId,jdbcType=CHAR},
+      </if>
+      <if test="record.isWithhold != null" >
+        IS_WITHHOLD = #{record.isWithhold,jdbcType=CHAR},
+      </if>
+      <if test="record.isCash != null" >
+        IS_CASH = #{record.isCash,jdbcType=CHAR},
+      </if>
+      <if test="record.isCredit != null" >
+        IS_CREDIT = #{record.isCredit,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update BANK
+    set BANK_ID = #{record.bankId,jdbcType=CHAR},
+      BANK_STAT = #{record.bankStat,jdbcType=CHAR},
+      BANK_NAME = #{record.bankName,jdbcType=VARCHAR},
+      BANK_SHORT_NAME = #{record.bankShortName,jdbcType=VARCHAR},
+      IS_VERIFY_ID = #{record.isVerifyId,jdbcType=CHAR},
+      IS_WITHHOLD = #{record.isWithhold,jdbcType=CHAR},
+      IS_CASH = #{record.isCash,jdbcType=CHAR},
+      IS_CREDIT = #{record.isCredit,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.refmobile.dal.dao.BANKDO" >
+    update BANK
+    <set >
+      <if test="bankStat != null" >
+        BANK_STAT = #{bankStat,jdbcType=CHAR},
+      </if>
+      <if test="bankName != null" >
+        BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankShortName != null" >
+        BANK_SHORT_NAME = #{bankShortName,jdbcType=VARCHAR},
+      </if>
+      <if test="isVerifyId != null" >
+        IS_VERIFY_ID = #{isVerifyId,jdbcType=CHAR},
+      </if>
+      <if test="isWithhold != null" >
+        IS_WITHHOLD = #{isWithhold,jdbcType=CHAR},
+      </if>
+      <if test="isCash != null" >
+        IS_CASH = #{isCash,jdbcType=CHAR},
+      </if>
+      <if test="isCredit != null" >
+        IS_CREDIT = #{isCredit,jdbcType=CHAR},
+      </if>
+    </set>
+    where BANK_ID = #{bankId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.refmobile.dal.dao.BANKDO" >
+    update BANK
+    set BANK_STAT = #{bankStat,jdbcType=CHAR},
+      BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      BANK_SHORT_NAME = #{bankShortName,jdbcType=VARCHAR},
+      IS_VERIFY_ID = #{isVerifyId,jdbcType=CHAR},
+      IS_WITHHOLD = #{isWithhold,jdbcType=CHAR},
+      IS_CASH = #{isCash,jdbcType=CHAR},
+      IS_CREDIT = #{isCredit,jdbcType=CHAR}
+    where BANK_ID = #{bankId,jdbcType=CHAR}
+  </update>
+</mapper>

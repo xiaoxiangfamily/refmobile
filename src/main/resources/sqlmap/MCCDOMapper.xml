@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.refmobile.dal.mapper.MCCDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.refmobile.dal.dao.MCCDO" >
+    <id column="MCC" property="mcc" jdbcType="CHAR" />
+    <result column="PROV_NAME" property="provName" jdbcType="VARCHAR" />
+    <result column="CITY_NAME" property="cityName" jdbcType="VARCHAR" />
+    <result column="COUNTRY_NAME" property="countryName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MCC, PROV_NAME, CITY_NAME, COUNTRY_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.refmobile.dal.dao.MCCDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MCC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from MCC
+    where MCC = #{mcc,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MCC
+    where MCC = #{mcc,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.refmobile.dal.dao.MCCDOExample" >
+    delete from MCC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.refmobile.dal.dao.MCCDO" >
+    insert into MCC (MCC, PROV_NAME, CITY_NAME, 
+      COUNTRY_NAME)
+    values (#{mcc,jdbcType=CHAR}, #{provName,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, 
+      #{countryName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.refmobile.dal.dao.MCCDO" >
+    insert into MCC
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mcc != null" >
+        MCC,
+      </if>
+      <if test="provName != null" >
+        PROV_NAME,
+      </if>
+      <if test="cityName != null" >
+        CITY_NAME,
+      </if>
+      <if test="countryName != null" >
+        COUNTRY_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mcc != null" >
+        #{mcc,jdbcType=CHAR},
+      </if>
+      <if test="provName != null" >
+        #{provName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="countryName != null" >
+        #{countryName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.refmobile.dal.dao.MCCDOExample" resultType="java.lang.Integer" >
+    select count(*) from MCC
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update MCC
+    <set >
+      <if test="record.mcc != null" >
+        MCC = #{record.mcc,jdbcType=CHAR},
+      </if>
+      <if test="record.provName != null" >
+        PROV_NAME = #{record.provName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityName != null" >
+        CITY_NAME = #{record.cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.countryName != null" >
+        COUNTRY_NAME = #{record.countryName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update MCC
+    set MCC = #{record.mcc,jdbcType=CHAR},
+      PROV_NAME = #{record.provName,jdbcType=VARCHAR},
+      CITY_NAME = #{record.cityName,jdbcType=VARCHAR},
+      COUNTRY_NAME = #{record.countryName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.refmobile.dal.dao.MCCDO" >
+    update MCC
+    <set >
+      <if test="provName != null" >
+        PROV_NAME = #{provName,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null" >
+        CITY_NAME = #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="countryName != null" >
+        COUNTRY_NAME = #{countryName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MCC = #{mcc,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.refmobile.dal.dao.MCCDO" >
+    update MCC
+    set PROV_NAME = #{provName,jdbcType=VARCHAR},
+      CITY_NAME = #{cityName,jdbcType=VARCHAR},
+      COUNTRY_NAME = #{countryName,jdbcType=VARCHAR}
+    where MCC = #{mcc,jdbcType=CHAR}
+  </update>
+</mapper>

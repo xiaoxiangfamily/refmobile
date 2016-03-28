@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.refmobile.dal.mapper.MPUSRDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.refmobile.dal.dao.MPUSRDO" >
+    <id column="MEMBER_ID" property="memberId" jdbcType="CHAR" />
+    <result column="USR_STAT" property="usrStat" jdbcType="CHAR" />
+    <result column="USR_PASS" property="usrPass" jdbcType="CHAR" />
+    <result column="USR_TXPASS" property="usrTxpass" jdbcType="CHAR" />
+    <result column="LST_SCUU_LOGIN_DTTM" property="lstScuuLoginDttm" jdbcType="CHAR" />
+    <result column="LST_FAIL_LOGIN_DTTM" property="lstFailLoginDttm" jdbcType="CHAR" />
+    <result column="FAIL_LOGIN_CNT" property="failLoginCnt" jdbcType="DECIMAL" />
+    <result column="LST_UPD_PWD_DTTM" property="lstUpdPwdDttm" jdbcType="CHAR" />
+    <result column="IS_FORCE_UPD_PASS" property="isForceUpdPass" jdbcType="CHAR" />
+    <result column="IS_VERIFY_ID" property="isVerifyId" jdbcType="CHAR" />
+    <result column="IS_BIND_CARD" property="isBindCard" jdbcType="CHAR" />
+    <result column="USR_MOBILE" property="usrMobile" jdbcType="CHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="USR_HEAD_FLPH" property="usrHeadFlph" jdbcType="VARCHAR" />
+    <result column="TXPASS_STAT" property="txpassStat" jdbcType="CHAR" />
+    <result column="FAILS_TXPASS_CNT" property="failsTxpassCnt" jdbcType="DECIMAL" />
+    <result column="LST_UPD_TXPWD_DTTM" property="lstUpdTxpwdDttm" jdbcType="CHAR" />
+    <result column="REC_CRET_DTTM" property="recCretDttm" jdbcType="CHAR" />
+    <result column="LST_UPD_DTTM" property="lstUpdDttm" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MEMBER_ID, USR_STAT, USR_PASS, USR_TXPASS, LST_SCUU_LOGIN_DTTM, LST_FAIL_LOGIN_DTTM, 
+    FAIL_LOGIN_CNT, LST_UPD_PWD_DTTM, IS_FORCE_UPD_PASS, IS_VERIFY_ID, IS_BIND_CARD, 
+    USR_MOBILE, EMAIL, USR_HEAD_FLPH, TXPASS_STAT, FAILS_TXPASS_CNT, LST_UPD_TXPWD_DTTM, 
+    REC_CRET_DTTM, LST_UPD_DTTM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.refmobile.dal.dao.MPUSRDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MPUSR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from MPUSR
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MPUSR
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.refmobile.dal.dao.MPUSRDOExample" >
+    delete from MPUSR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.refmobile.dal.dao.MPUSRDO" >
+    insert into MPUSR (MEMBER_ID, USR_STAT, USR_PASS, 
+      USR_TXPASS, LST_SCUU_LOGIN_DTTM, LST_FAIL_LOGIN_DTTM, 
+      FAIL_LOGIN_CNT, LST_UPD_PWD_DTTM, IS_FORCE_UPD_PASS, 
+      IS_VERIFY_ID, IS_BIND_CARD, USR_MOBILE, 
+      EMAIL, USR_HEAD_FLPH, TXPASS_STAT, 
+      FAILS_TXPASS_CNT, LST_UPD_TXPWD_DTTM, REC_CRET_DTTM, 
+      LST_UPD_DTTM)
+    values (#{memberId,jdbcType=CHAR}, #{usrStat,jdbcType=CHAR}, #{usrPass,jdbcType=CHAR}, 
+      #{usrTxpass,jdbcType=CHAR}, #{lstScuuLoginDttm,jdbcType=CHAR}, #{lstFailLoginDttm,jdbcType=CHAR}, 
+      #{failLoginCnt,jdbcType=DECIMAL}, #{lstUpdPwdDttm,jdbcType=CHAR}, #{isForceUpdPass,jdbcType=CHAR}, 
+      #{isVerifyId,jdbcType=CHAR}, #{isBindCard,jdbcType=CHAR}, #{usrMobile,jdbcType=CHAR}, 
+      #{email,jdbcType=VARCHAR}, #{usrHeadFlph,jdbcType=VARCHAR}, #{txpassStat,jdbcType=CHAR}, 
+      #{failsTxpassCnt,jdbcType=DECIMAL}, #{lstUpdTxpwdDttm,jdbcType=CHAR}, #{recCretDttm,jdbcType=CHAR}, 
+      #{lstUpdDttm,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.refmobile.dal.dao.MPUSRDO" >
+    insert into MPUSR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="usrStat != null" >
+        USR_STAT,
+      </if>
+      <if test="usrPass != null" >
+        USR_PASS,
+      </if>
+      <if test="usrTxpass != null" >
+        USR_TXPASS,
+      </if>
+      <if test="lstScuuLoginDttm != null" >
+        LST_SCUU_LOGIN_DTTM,
+      </if>
+      <if test="lstFailLoginDttm != null" >
+        LST_FAIL_LOGIN_DTTM,
+      </if>
+      <if test="failLoginCnt != null" >
+        FAIL_LOGIN_CNT,
+      </if>
+      <if test="lstUpdPwdDttm != null" >
+        LST_UPD_PWD_DTTM,
+      </if>
+      <if test="isForceUpdPass != null" >
+        IS_FORCE_UPD_PASS,
+      </if>
+      <if test="isVerifyId != null" >
+        IS_VERIFY_ID,
+      </if>
+      <if test="isBindCard != null" >
+        IS_BIND_CARD,
+      </if>
+      <if test="usrMobile != null" >
+        USR_MOBILE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="usrHeadFlph != null" >
+        USR_HEAD_FLPH,
+      </if>
+      <if test="txpassStat != null" >
+        TXPASS_STAT,
+      </if>
+      <if test="failsTxpassCnt != null" >
+        FAILS_TXPASS_CNT,
+      </if>
+      <if test="lstUpdTxpwdDttm != null" >
+        LST_UPD_TXPWD_DTTM,
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM,
+      </if>
+      <if test="lstUpdDttm != null" >
+        LST_UPD_DTTM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=CHAR},
+      </if>
+      <if test="usrStat != null" >
+        #{usrStat,jdbcType=CHAR},
+      </if>
+      <if test="usrPass != null" >
+        #{usrPass,jdbcType=CHAR},
+      </if>
+      <if test="usrTxpass != null" >
+        #{usrTxpass,jdbcType=CHAR},
+      </if>
+      <if test="lstScuuLoginDttm != null" >
+        #{lstScuuLoginDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstFailLoginDttm != null" >
+        #{lstFailLoginDttm,jdbcType=CHAR},
+      </if>
+      <if test="failLoginCnt != null" >
+        #{failLoginCnt,jdbcType=DECIMAL},
+      </if>
+      <if test="lstUpdPwdDttm != null" >
+        #{lstUpdPwdDttm,jdbcType=CHAR},
+      </if>
+      <if test="isForceUpdPass != null" >
+        #{isForceUpdPass,jdbcType=CHAR},
+      </if>
+      <if test="isVerifyId != null" >
+        #{isVerifyId,jdbcType=CHAR},
+      </if>
+      <if test="isBindCard != null" >
+        #{isBindCard,jdbcType=CHAR},
+      </if>
+      <if test="usrMobile != null" >
+        #{usrMobile,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="usrHeadFlph != null" >
+        #{usrHeadFlph,jdbcType=VARCHAR},
+      </if>
+      <if test="txpassStat != null" >
+        #{txpassStat,jdbcType=CHAR},
+      </if>
+      <if test="failsTxpassCnt != null" >
+        #{failsTxpassCnt,jdbcType=DECIMAL},
+      </if>
+      <if test="lstUpdTxpwdDttm != null" >
+        #{lstUpdTxpwdDttm,jdbcType=CHAR},
+      </if>
+      <if test="recCretDttm != null" >
+        #{recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstUpdDttm != null" >
+        #{lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.refmobile.dal.dao.MPUSRDOExample" resultType="java.lang.Integer" >
+    select count(*) from MPUSR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update MPUSR
+    <set >
+      <if test="record.memberId != null" >
+        MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      </if>
+      <if test="record.usrStat != null" >
+        USR_STAT = #{record.usrStat,jdbcType=CHAR},
+      </if>
+      <if test="record.usrPass != null" >
+        USR_PASS = #{record.usrPass,jdbcType=CHAR},
+      </if>
+      <if test="record.usrTxpass != null" >
+        USR_TXPASS = #{record.usrTxpass,jdbcType=CHAR},
+      </if>
+      <if test="record.lstScuuLoginDttm != null" >
+        LST_SCUU_LOGIN_DTTM = #{record.lstScuuLoginDttm,jdbcType=CHAR},
+      </if>
+      <if test="record.lstFailLoginDttm != null" >
+        LST_FAIL_LOGIN_DTTM = #{record.lstFailLoginDttm,jdbcType=CHAR},
+      </if>
+      <if test="record.failLoginCnt != null" >
+        FAIL_LOGIN_CNT = #{record.failLoginCnt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lstUpdPwdDttm != null" >
+        LST_UPD_PWD_DTTM = #{record.lstUpdPwdDttm,jdbcType=CHAR},
+      </if>
+      <if test="record.isForceUpdPass != null" >
+        IS_FORCE_UPD_PASS = #{record.isForceUpdPass,jdbcType=CHAR},
+      </if>
+      <if test="record.isVerifyId != null" >
+        IS_VERIFY_ID = #{record.isVerifyId,jdbcType=CHAR},
+      </if>
+      <if test="record.isBindCard != null" >
+        IS_BIND_CARD = #{record.isBindCard,jdbcType=CHAR},
+      </if>
+      <if test="record.usrMobile != null" >
+        USR_MOBILE = #{record.usrMobile,jdbcType=CHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usrHeadFlph != null" >
+        USR_HEAD_FLPH = #{record.usrHeadFlph,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txpassStat != null" >
+        TXPASS_STAT = #{record.txpassStat,jdbcType=CHAR},
+      </if>
+      <if test="record.failsTxpassCnt != null" >
+        FAILS_TXPASS_CNT = #{record.failsTxpassCnt,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lstUpdTxpwdDttm != null" >
+        LST_UPD_TXPWD_DTTM = #{record.lstUpdTxpwdDttm,jdbcType=CHAR},
+      </if>
+      <if test="record.recCretDttm != null" >
+        REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="record.lstUpdDttm != null" >
+        LST_UPD_DTTM = #{record.lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update MPUSR
+    set MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      USR_STAT = #{record.usrStat,jdbcType=CHAR},
+      USR_PASS = #{record.usrPass,jdbcType=CHAR},
+      USR_TXPASS = #{record.usrTxpass,jdbcType=CHAR},
+      LST_SCUU_LOGIN_DTTM = #{record.lstScuuLoginDttm,jdbcType=CHAR},
+      LST_FAIL_LOGIN_DTTM = #{record.lstFailLoginDttm,jdbcType=CHAR},
+      FAIL_LOGIN_CNT = #{record.failLoginCnt,jdbcType=DECIMAL},
+      LST_UPD_PWD_DTTM = #{record.lstUpdPwdDttm,jdbcType=CHAR},
+      IS_FORCE_UPD_PASS = #{record.isForceUpdPass,jdbcType=CHAR},
+      IS_VERIFY_ID = #{record.isVerifyId,jdbcType=CHAR},
+      IS_BIND_CARD = #{record.isBindCard,jdbcType=CHAR},
+      USR_MOBILE = #{record.usrMobile,jdbcType=CHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      USR_HEAD_FLPH = #{record.usrHeadFlph,jdbcType=VARCHAR},
+      TXPASS_STAT = #{record.txpassStat,jdbcType=CHAR},
+      FAILS_TXPASS_CNT = #{record.failsTxpassCnt,jdbcType=DECIMAL},
+      LST_UPD_TXPWD_DTTM = #{record.lstUpdTxpwdDttm,jdbcType=CHAR},
+      REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR},
+      LST_UPD_DTTM = #{record.lstUpdDttm,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.refmobile.dal.dao.MPUSRDO" >
+    update MPUSR
+    <set >
+      <if test="usrStat != null" >
+        USR_STAT = #{usrStat,jdbcType=CHAR},
+      </if>
+      <if test="usrPass != null" >
+        USR_PASS = #{usrPass,jdbcType=CHAR},
+      </if>
+      <if test="usrTxpass != null" >
+        USR_TXPASS = #{usrTxpass,jdbcType=CHAR},
+      </if>
+      <if test="lstScuuLoginDttm != null" >
+        LST_SCUU_LOGIN_DTTM = #{lstScuuLoginDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstFailLoginDttm != null" >
+        LST_FAIL_LOGIN_DTTM = #{lstFailLoginDttm,jdbcType=CHAR},
+      </if>
+      <if test="failLoginCnt != null" >
+        FAIL_LOGIN_CNT = #{failLoginCnt,jdbcType=DECIMAL},
+      </if>
+      <if test="lstUpdPwdDttm != null" >
+        LST_UPD_PWD_DTTM = #{lstUpdPwdDttm,jdbcType=CHAR},
+      </if>
+      <if test="isForceUpdPass != null" >
+        IS_FORCE_UPD_PASS = #{isForceUpdPass,jdbcType=CHAR},
+      </if>
+      <if test="isVerifyId != null" >
+        IS_VERIFY_ID = #{isVerifyId,jdbcType=CHAR},
+      </if>
+      <if test="isBindCard != null" >
+        IS_BIND_CARD = #{isBindCard,jdbcType=CHAR},
+      </if>
+      <if test="usrMobile != null" >
+        USR_MOBILE = #{usrMobile,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="usrHeadFlph != null" >
+        USR_HEAD_FLPH = #{usrHeadFlph,jdbcType=VARCHAR},
+      </if>
+      <if test="txpassStat != null" >
+        TXPASS_STAT = #{txpassStat,jdbcType=CHAR},
+      </if>
+      <if test="failsTxpassCnt != null" >
+        FAILS_TXPASS_CNT = #{failsTxpassCnt,jdbcType=DECIMAL},
+      </if>
+      <if test="lstUpdTxpwdDttm != null" >
+        LST_UPD_TXPWD_DTTM = #{lstUpdTxpwdDttm,jdbcType=CHAR},
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstUpdDttm != null" >
+        LST_UPD_DTTM = #{lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.refmobile.dal.dao.MPUSRDO" >
+    update MPUSR
+    set USR_STAT = #{usrStat,jdbcType=CHAR},
+      USR_PASS = #{usrPass,jdbcType=CHAR},
+      USR_TXPASS = #{usrTxpass,jdbcType=CHAR},
+      LST_SCUU_LOGIN_DTTM = #{lstScuuLoginDttm,jdbcType=CHAR},
+      LST_FAIL_LOGIN_DTTM = #{lstFailLoginDttm,jdbcType=CHAR},
+      FAIL_LOGIN_CNT = #{failLoginCnt,jdbcType=DECIMAL},
+      LST_UPD_PWD_DTTM = #{lstUpdPwdDttm,jdbcType=CHAR},
+      IS_FORCE_UPD_PASS = #{isForceUpdPass,jdbcType=CHAR},
+      IS_VERIFY_ID = #{isVerifyId,jdbcType=CHAR},
+      IS_BIND_CARD = #{isBindCard,jdbcType=CHAR},
+      USR_MOBILE = #{usrMobile,jdbcType=CHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      USR_HEAD_FLPH = #{usrHeadFlph,jdbcType=VARCHAR},
+      TXPASS_STAT = #{txpassStat,jdbcType=CHAR},
+      FAILS_TXPASS_CNT = #{failsTxpassCnt,jdbcType=DECIMAL},
+      LST_UPD_TXPWD_DTTM = #{lstUpdTxpwdDttm,jdbcType=CHAR},
+      REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR},
+      LST_UPD_DTTM = #{lstUpdDttm,jdbcType=CHAR}
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </update>
+</mapper>

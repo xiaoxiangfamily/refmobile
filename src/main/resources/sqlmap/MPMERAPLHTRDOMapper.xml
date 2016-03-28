@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.refmobile.dal.mapper.MPMERAPLHTRDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.refmobile.dal.dao.MPMERAPLHTRDO" >
+    <id column="MEMBER_ID" property="memberId" jdbcType="CHAR" />
+    <result column="APPLAY_NO" property="applayNo" jdbcType="DECIMAL" />
+    <result column="SEQ_NO" property="seqNo" jdbcType="DECIMAL" />
+    <result column="ARCH_FLPH_01" property="archFlph01" jdbcType="VARCHAR" />
+    <result column="ARCH_FLPH_02" property="archFlph02" jdbcType="VARCHAR" />
+    <result column="ARCH_FLPH_03" property="archFlph03" jdbcType="VARCHAR" />
+    <result column="ARCH_FLPH_04" property="archFlph04" jdbcType="VARCHAR" />
+    <result column="PROC_DATE" property="procDate" jdbcType="CHAR" />
+    <result column="PROC_TIME" property="procTime" jdbcType="CHAR" />
+    <result column="TELLER_ID" property="tellerId" jdbcType="VARCHAR" />
+    <result column="APPROVE_STAT" property="approveStat" jdbcType="CHAR" />
+    <result column="PROC_DESC" property="procDesc" jdbcType="VARCHAR" />
+    <result column="REC_CRET_DTTM" property="recCretDttm" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MEMBER_ID, APPLAY_NO, SEQ_NO, ARCH_FLPH_01, ARCH_FLPH_02, ARCH_FLPH_03, ARCH_FLPH_04, 
+    PROC_DATE, PROC_TIME, TELLER_ID, APPROVE_STAT, PROC_DESC, REC_CRET_DTTM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.refmobile.dal.dao.MPMERAPLHTRDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MPMERAPLHTR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from MPMERAPLHTR
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from MPMERAPLHTR
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.refmobile.dal.dao.MPMERAPLHTRDOExample" >
+    delete from MPMERAPLHTR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.refmobile.dal.dao.MPMERAPLHTRDO" >
+    insert into MPMERAPLHTR (MEMBER_ID, APPLAY_NO, SEQ_NO, 
+      ARCH_FLPH_01, ARCH_FLPH_02, ARCH_FLPH_03, 
+      ARCH_FLPH_04, PROC_DATE, PROC_TIME, 
+      TELLER_ID, APPROVE_STAT, PROC_DESC, 
+      REC_CRET_DTTM)
+    values (#{memberId,jdbcType=CHAR}, #{applayNo,jdbcType=DECIMAL}, #{seqNo,jdbcType=DECIMAL}, 
+      #{archFlph01,jdbcType=VARCHAR}, #{archFlph02,jdbcType=VARCHAR}, #{archFlph03,jdbcType=VARCHAR}, 
+      #{archFlph04,jdbcType=VARCHAR}, #{procDate,jdbcType=CHAR}, #{procTime,jdbcType=CHAR}, 
+      #{tellerId,jdbcType=VARCHAR}, #{approveStat,jdbcType=CHAR}, #{procDesc,jdbcType=VARCHAR}, 
+      #{recCretDttm,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.refmobile.dal.dao.MPMERAPLHTRDO" >
+    insert into MPMERAPLHTR
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="applayNo != null" >
+        APPLAY_NO,
+      </if>
+      <if test="seqNo != null" >
+        SEQ_NO,
+      </if>
+      <if test="archFlph01 != null" >
+        ARCH_FLPH_01,
+      </if>
+      <if test="archFlph02 != null" >
+        ARCH_FLPH_02,
+      </if>
+      <if test="archFlph03 != null" >
+        ARCH_FLPH_03,
+      </if>
+      <if test="archFlph04 != null" >
+        ARCH_FLPH_04,
+      </if>
+      <if test="procDate != null" >
+        PROC_DATE,
+      </if>
+      <if test="procTime != null" >
+        PROC_TIME,
+      </if>
+      <if test="tellerId != null" >
+        TELLER_ID,
+      </if>
+      <if test="approveStat != null" >
+        APPROVE_STAT,
+      </if>
+      <if test="procDesc != null" >
+        PROC_DESC,
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=CHAR},
+      </if>
+      <if test="applayNo != null" >
+        #{applayNo,jdbcType=DECIMAL},
+      </if>
+      <if test="seqNo != null" >
+        #{seqNo,jdbcType=DECIMAL},
+      </if>
+      <if test="archFlph01 != null" >
+        #{archFlph01,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph02 != null" >
+        #{archFlph02,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph03 != null" >
+        #{archFlph03,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph04 != null" >
+        #{archFlph04,jdbcType=VARCHAR},
+      </if>
+      <if test="procDate != null" >
+        #{procDate,jdbcType=CHAR},
+      </if>
+      <if test="procTime != null" >
+        #{procTime,jdbcType=CHAR},
+      </if>
+      <if test="tellerId != null" >
+        #{tellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="approveStat != null" >
+        #{approveStat,jdbcType=CHAR},
+      </if>
+      <if test="procDesc != null" >
+        #{procDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="recCretDttm != null" >
+        #{recCretDttm,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.refmobile.dal.dao.MPMERAPLHTRDOExample" resultType="java.lang.Integer" >
+    select count(*) from MPMERAPLHTR
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update MPMERAPLHTR
+    <set >
+      <if test="record.memberId != null" >
+        MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      </if>
+      <if test="record.applayNo != null" >
+        APPLAY_NO = #{record.applayNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.seqNo != null" >
+        SEQ_NO = #{record.seqNo,jdbcType=DECIMAL},
+      </if>
+      <if test="record.archFlph01 != null" >
+        ARCH_FLPH_01 = #{record.archFlph01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.archFlph02 != null" >
+        ARCH_FLPH_02 = #{record.archFlph02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.archFlph03 != null" >
+        ARCH_FLPH_03 = #{record.archFlph03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.archFlph04 != null" >
+        ARCH_FLPH_04 = #{record.archFlph04,jdbcType=VARCHAR},
+      </if>
+      <if test="record.procDate != null" >
+        PROC_DATE = #{record.procDate,jdbcType=CHAR},
+      </if>
+      <if test="record.procTime != null" >
+        PROC_TIME = #{record.procTime,jdbcType=CHAR},
+      </if>
+      <if test="record.tellerId != null" >
+        TELLER_ID = #{record.tellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.approveStat != null" >
+        APPROVE_STAT = #{record.approveStat,jdbcType=CHAR},
+      </if>
+      <if test="record.procDesc != null" >
+        PROC_DESC = #{record.procDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recCretDttm != null" >
+        REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update MPMERAPLHTR
+    set MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      APPLAY_NO = #{record.applayNo,jdbcType=DECIMAL},
+      SEQ_NO = #{record.seqNo,jdbcType=DECIMAL},
+      ARCH_FLPH_01 = #{record.archFlph01,jdbcType=VARCHAR},
+      ARCH_FLPH_02 = #{record.archFlph02,jdbcType=VARCHAR},
+      ARCH_FLPH_03 = #{record.archFlph03,jdbcType=VARCHAR},
+      ARCH_FLPH_04 = #{record.archFlph04,jdbcType=VARCHAR},
+      PROC_DATE = #{record.procDate,jdbcType=CHAR},
+      PROC_TIME = #{record.procTime,jdbcType=CHAR},
+      TELLER_ID = #{record.tellerId,jdbcType=VARCHAR},
+      APPROVE_STAT = #{record.approveStat,jdbcType=CHAR},
+      PROC_DESC = #{record.procDesc,jdbcType=VARCHAR},
+      REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.refmobile.dal.dao.MPMERAPLHTRDO" >
+    update MPMERAPLHTR
+    <set >
+      <if test="applayNo != null" >
+        APPLAY_NO = #{applayNo,jdbcType=DECIMAL},
+      </if>
+      <if test="seqNo != null" >
+        SEQ_NO = #{seqNo,jdbcType=DECIMAL},
+      </if>
+      <if test="archFlph01 != null" >
+        ARCH_FLPH_01 = #{archFlph01,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph02 != null" >
+        ARCH_FLPH_02 = #{archFlph02,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph03 != null" >
+        ARCH_FLPH_03 = #{archFlph03,jdbcType=VARCHAR},
+      </if>
+      <if test="archFlph04 != null" >
+        ARCH_FLPH_04 = #{archFlph04,jdbcType=VARCHAR},
+      </if>
+      <if test="procDate != null" >
+        PROC_DATE = #{procDate,jdbcType=CHAR},
+      </if>
+      <if test="procTime != null" >
+        PROC_TIME = #{procTime,jdbcType=CHAR},
+      </if>
+      <if test="tellerId != null" >
+        TELLER_ID = #{tellerId,jdbcType=VARCHAR},
+      </if>
+      <if test="approveStat != null" >
+        APPROVE_STAT = #{approveStat,jdbcType=CHAR},
+      </if>
+      <if test="procDesc != null" >
+        PROC_DESC = #{procDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.refmobile.dal.dao.MPMERAPLHTRDO" >
+    update MPMERAPLHTR
+    set APPLAY_NO = #{applayNo,jdbcType=DECIMAL},
+      SEQ_NO = #{seqNo,jdbcType=DECIMAL},
+      ARCH_FLPH_01 = #{archFlph01,jdbcType=VARCHAR},
+      ARCH_FLPH_02 = #{archFlph02,jdbcType=VARCHAR},
+      ARCH_FLPH_03 = #{archFlph03,jdbcType=VARCHAR},
+      ARCH_FLPH_04 = #{archFlph04,jdbcType=VARCHAR},
+      PROC_DATE = #{procDate,jdbcType=CHAR},
+      PROC_TIME = #{procTime,jdbcType=CHAR},
+      TELLER_ID = #{tellerId,jdbcType=VARCHAR},
+      APPROVE_STAT = #{approveStat,jdbcType=CHAR},
+      PROC_DESC = #{procDesc,jdbcType=VARCHAR},
+      REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR}
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+  </update>
+</mapper>

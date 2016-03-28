@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.refmobile.dal.mapper.MPMPARAMDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.refmobile.dal.dao.MPMPARAMDO" >
+    <id column="MEMBER_ID" property="memberId" jdbcType="CHAR" />
+    <id column="PARAM_CODE" property="paramCode" jdbcType="CHAR" />
+    <result column="PARAM_STAT" property="paramStat" jdbcType="CHAR" />
+    <result column="PARAM_VALUE" property="paramValue" jdbcType="VARCHAR" />
+    <result column="REC_CRET_DTTM" property="recCretDttm" jdbcType="CHAR" />
+    <result column="LST_UPD_DTTM" property="lstUpdDttm" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MEMBER_ID, PARAM_CODE, PARAM_STAT, PARAM_VALUE, REC_CRET_DTTM, LST_UPD_DTTM
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.refmobile.dal.dao.MPMPARAMDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from MPMPARAM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.allcheer.refmobile.dal.dao.MPMPARAMDOKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from MPMPARAM
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+      and PARAM_CODE = #{paramCode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.allcheer.refmobile.dal.dao.MPMPARAMDOKey" >
+    delete from MPMPARAM
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+      and PARAM_CODE = #{paramCode,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.refmobile.dal.dao.MPMPARAMDOExample" >
+    delete from MPMPARAM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.refmobile.dal.dao.MPMPARAMDO" >
+    insert into MPMPARAM (MEMBER_ID, PARAM_CODE, PARAM_STAT, 
+      PARAM_VALUE, REC_CRET_DTTM, LST_UPD_DTTM
+      )
+    values (#{memberId,jdbcType=CHAR}, #{paramCode,jdbcType=CHAR}, #{paramStat,jdbcType=CHAR}, 
+      #{paramValue,jdbcType=VARCHAR}, #{recCretDttm,jdbcType=CHAR}, #{lstUpdDttm,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.refmobile.dal.dao.MPMPARAMDO" >
+    insert into MPMPARAM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="paramCode != null" >
+        PARAM_CODE,
+      </if>
+      <if test="paramStat != null" >
+        PARAM_STAT,
+      </if>
+      <if test="paramValue != null" >
+        PARAM_VALUE,
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM,
+      </if>
+      <if test="lstUpdDttm != null" >
+        LST_UPD_DTTM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=CHAR},
+      </if>
+      <if test="paramCode != null" >
+        #{paramCode,jdbcType=CHAR},
+      </if>
+      <if test="paramStat != null" >
+        #{paramStat,jdbcType=CHAR},
+      </if>
+      <if test="paramValue != null" >
+        #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="recCretDttm != null" >
+        #{recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstUpdDttm != null" >
+        #{lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.refmobile.dal.dao.MPMPARAMDOExample" resultType="java.lang.Integer" >
+    select count(*) from MPMPARAM
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update MPMPARAM
+    <set >
+      <if test="record.memberId != null" >
+        MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      </if>
+      <if test="record.paramCode != null" >
+        PARAM_CODE = #{record.paramCode,jdbcType=CHAR},
+      </if>
+      <if test="record.paramStat != null" >
+        PARAM_STAT = #{record.paramStat,jdbcType=CHAR},
+      </if>
+      <if test="record.paramValue != null" >
+        PARAM_VALUE = #{record.paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recCretDttm != null" >
+        REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="record.lstUpdDttm != null" >
+        LST_UPD_DTTM = #{record.lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update MPMPARAM
+    set MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      PARAM_CODE = #{record.paramCode,jdbcType=CHAR},
+      PARAM_STAT = #{record.paramStat,jdbcType=CHAR},
+      PARAM_VALUE = #{record.paramValue,jdbcType=VARCHAR},
+      REC_CRET_DTTM = #{record.recCretDttm,jdbcType=CHAR},
+      LST_UPD_DTTM = #{record.lstUpdDttm,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.refmobile.dal.dao.MPMPARAMDO" >
+    update MPMPARAM
+    <set >
+      <if test="paramStat != null" >
+        PARAM_STAT = #{paramStat,jdbcType=CHAR},
+      </if>
+      <if test="paramValue != null" >
+        PARAM_VALUE = #{paramValue,jdbcType=VARCHAR},
+      </if>
+      <if test="recCretDttm != null" >
+        REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR},
+      </if>
+      <if test="lstUpdDttm != null" >
+        LST_UPD_DTTM = #{lstUpdDttm,jdbcType=CHAR},
+      </if>
+    </set>
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+      and PARAM_CODE = #{paramCode,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.refmobile.dal.dao.MPMPARAMDO" >
+    update MPMPARAM
+    set PARAM_STAT = #{paramStat,jdbcType=CHAR},
+      PARAM_VALUE = #{paramValue,jdbcType=VARCHAR},
+      REC_CRET_DTTM = #{recCretDttm,jdbcType=CHAR},
+      LST_UPD_DTTM = #{lstUpdDttm,jdbcType=CHAR}
+    where MEMBER_ID = #{memberId,jdbcType=CHAR}
+      and PARAM_CODE = #{paramCode,jdbcType=CHAR}
+  </update>
+</mapper>
